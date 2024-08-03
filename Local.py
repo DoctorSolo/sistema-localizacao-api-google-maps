@@ -3,7 +3,7 @@ import webbrowser   # Esta biblioteca é usada para abrir a web
 
 class Local:
     # Instancia nescessaria para acessar o projeto do Google Clound
-    gmaps = googlemaps.Client(key='AIzaSyCavaL-nZOrcIE8y1WKw6p6Z2EgKsFBhYQ')
+    gmaps = googlemaps.Client(key='')
     
     
     def __init__(self, latitude:float, longitude:float):    # O construtor recebe os paremetros x(latitude) e y(longetude),
