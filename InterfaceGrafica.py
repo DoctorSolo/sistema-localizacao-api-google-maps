@@ -53,9 +53,8 @@ class InterfaceGrafica:
         entrada_longitude.grid(column=1,row=2, pady=10)
 
         # Resultado
-        result = ''
         saida = Label(janela, text='')
-        saida.grid(column=3, row=1)
+        saida.grid(column=3, row=1, padx=30, pady=30)
         
         
         # Para o botão

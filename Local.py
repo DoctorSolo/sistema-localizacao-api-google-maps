@@ -20,7 +20,14 @@ class Local:
         
         try:    # Caso a localização exista ele retorna todos os dados do local
             location = self.gmaps.reverse_geocode((self.latitude, self.longitude))
-            return location
+            primeiro_resultado = location[0]
+            # Extrai informações essenciais
+            address = primeiro_resultado.get('formatted_address', 'Endereço não encontrado')
+            loc = primeiro_resultado.get('geometry', {}).get('location', {})
+            return {
+                "Endereço": address,
+                "localização": loc
+            }
         
         except:
             return 'A localização não existe'
