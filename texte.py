@@ -2,7 +2,7 @@ from geopy.geocoders import Nominatim
 import googlemaps
 
 
-gmaps = googlemaps.Client(key='AIzaSyCavaL-nZOrcIE8y1WKw6p6Z2EgKsFBhYQ')
+gmaps = googlemaps.Client(key='')
 
 # Use aqui para pegar a cordenada
 local = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
