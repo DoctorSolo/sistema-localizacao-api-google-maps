@@ -1,72 +1,87 @@
-from tkinter    import *
-from Local      import Local
+import tkinter as tk
+from tkinter import *
+from tkintermapview import TkinterMapView
+from Local import Local
 
 
-# Vou implementar os valores atravez de uma interface grafica
 class InterfaceGrafica:
+
     def __init__(self) -> None:
         pass
 
-
-    # Devo ter certeza que o valor inserido seja um numero
     def validade_numero(self, P):
-        # Caso user comece digitando um numero negativo a validação vai aceitar
         if P == "" or P == "-":
             return True
         try:
-            # Tenta converter o valor de entrada, caso se aplica a float a validação aceita
             float(P)
             return True
-        # Caso o valor de entrada seja um caractere qualquer então o valor não sera digitado
         except ValueError:
             return False
 
-
-    # Este metodo é o mais importante da (classe), é aqui que fica as configurações da interface
     def Interface(self):
-        janela = Tk()   # Crio aqui a janenela
+        janela = Tk()
         janela.title("Buscar Localização")
 
-        # Atributo para a validade da entrada, se numero ou letra
-        validade = (janela.register(self.validade_numero), '%P')
+        validade = (janela.register(self.validade_numero), "%P")
 
-        # Para deixa a janela mais bonita e dinamica
-        titulo = Label(janela, text="Digite em baixo o valor das cordenada", pady=10)
-        titulo.grid(column=0,row=0)
-        
-        img = PhotoImage(file="imagens/lupa.png")
-        imagem_dec = Label(image=img)
-        imagem_dec.grid(column=2, row=5,padx=10, pady=10)
+        titulo = Label(
+            janela, text="Digite em baixo o valor das coordenadas", pady=10
+        )
+        titulo.grid(column=0, row=0, columnspan=2)
 
-        # Para entrada da latitude
+        try:
+            img = PhotoImage(file="imagens/lupa.png")
+            imagem_dec = Label(janela, image=img)
+            imagem_dec.image = img
+            imagem_dec.grid(column=2, row=0, rowspan=3, padx=10, pady=10)
+        except Exception:
+            pass
+
         txt_latitude = Label(janela, text="Informe aqui o valor da latitude: ")
         txt_latitude.grid(column=0, row=1)
 
-        entrada_latitude = Entry(janela, validate="key", validatecommand=validade)
-        entrada_latitude.grid(column=1,row=1, pady=10, padx=30)
+        entrada_latitude = Entry(
+            janela, validate="key", validatecommand=validade
+        )
+        entrada_latitude.grid(column=1, row=1, pady=10, padx=30)
 
-        # Para entrada da longitude
         txt_longitude = Label(janela, text="Informe aqui o valor da longitude: ")
         txt_longitude.grid(column=0, row=2)
 
-        entrada_longitude = Entry(janela, validate="key", validatecommand=validade)
-        entrada_longitude.grid(column=1,row=2, pady=10)
+        entrada_longitude = Entry(
+            janela, validate="key", validatecommand=validade
+        )
+        entrada_longitude.grid(column=1, row=2, pady=10)
 
-        # Resultado
-        saida = Label(janela, text='')
-        saida.grid(column=3, row=1, padx=30, pady=30)
+        saida = Label(janela, text="")
+        saida.grid(column=0, row=5, columnspan=3, padx=10, pady=10)
+
+        # Substituição do HtmlFrame pelo TkinterMapView
+        map_widget = TkinterMapView(janela, width=600, height=400, corner_radius=0)
+        map_widget.grid(column=0, row=6, columnspan=3, padx=10, pady=10)
         
-        
-        # Para o botão
+        # Posição inicial padrão (ex: Brasil)
+        map_widget.set_position(-14.2350, -51.9253)
+        map_widget.set_zoom(4)
+
         def insere_valor():
-            lat     = float(entrada_latitude.get())     #   A variavel [lat] e [long] vão coletar
-            long    = float(entrada_longitude.get())    #   os valores de entrada da interface.
-            local0 = Local(lat, long)                   #   A classe Local recebe seus valores aqui.
-            local0.mapa()                               #   A instancia ira mostrar a localização direto do (google maps)
-            saida["text"] = local0.pesquisa()           #   Informa qual é o local ou se não existe
+            if not entrada_latitude.get() or not entrada_longitude.get():
+                saida["text"] = "Preencha ambos os campos!"
+                return
 
+            lat = float(entrada_latitude.get())
+            long = float(entrada_longitude.get())
+            local0 = Local(lat, long)
+            local0.mapa()
+
+            # Atualiza o centro do mapa e adiciona um marcador
+            map_widget.set_position(lat, long)
+            map_widget.set_zoom(15)
+            map_widget.set_marker(lat, long, text="Local Encontrado")
+
+            saida["text"] = local0.pesquisa()
 
         enter = Button(janela, text="ENTER", command=insere_valor)
-        enter.grid(column=0, row=4)
+        enter.grid(column=0, row=4, columnspan=2, pady=10)
 
-        janela.mainloop()   #Fim da janela
+        janela.mainloop()

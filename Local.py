@@ -1,9 +1,10 @@
 import googlemaps   # Biblioteca para a API do google maps
 import webbrowser   # Esta biblioteca é usada para abrir a web
+from config import GEOCODING_API_KEY
 
 class Local:
     # Instancia nescessaria para acessar o projeto do Google Clound
-    gmaps = googlemaps.Client(key='')
+    gmaps = googlemaps.Client(key=GEOCODING_API_KEY)
     
     
     def __init__(self, latitude:float, longitude:float):    # O construtor recebe os paremetros x(latitude) e y(longetude),
