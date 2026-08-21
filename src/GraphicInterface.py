@@ -2,7 +2,7 @@ import customtkinter as ctk
 import theme_config
 
 from tkintermapview import TkinterMapView
-from src.Local import Local
+from src.SerchLocal import SerchLocal
 from PIL import Image
 
 
@@ -116,13 +116,12 @@ class GraphicInterface:
         
         lat = float(latitude.get())
         long = float(longitude.get())
-        local = Local(lat, long)
-        local.mapa()
+        local = SerchLocal(lat, long)
         
         self.__update_map(map_widget, lat, long)
         
         output.destroy()
-        self.__output(container, local.pesquisa())
+        self.__output(container, local.Serch())
     # END
     
     
