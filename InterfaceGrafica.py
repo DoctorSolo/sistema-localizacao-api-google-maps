@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkintermapview import TkinterMapView
-from Local import Local
+from src.Local import Local
 
 
 class InterfaceGrafica:

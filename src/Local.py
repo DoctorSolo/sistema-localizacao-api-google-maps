@@ -37,4 +37,4 @@ class Local:
     # Esta funcao é nescessaria para abrir a localização na web
     def mapa(self):
         url = f"https://www.google.com/maps?q={self.latitude},{self.longitude}"
-        webbrowser.open(url)
+        #webbrowser.open(url)

@@ -1,4 +1,4 @@
-from Local import Local
+from src.Local import Local
 
 # A entrada é definida aqui, 
 # 1 primeiro defino o input que recebe a cordenada
@@ -13,4 +13,4 @@ for x in range(2):
 
 local0 = Local(coordenada[0], coordenada[1])
 
-print(local0.pesquisa())
+print(local0.pesquisa()['Endereço'])
