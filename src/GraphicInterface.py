@@ -16,7 +16,7 @@ class GraphicInterface:
     
     
     # This functions check if number
-    def __validate_number(self, p: str) -> bool:
+    def __validate_number(self, p) -> bool:
         if p == "" or p == "-":
             return True
         try:
@@ -26,6 +26,7 @@ class GraphicInterface:
             return False
     # END
     
+    
     # This functions create a window
     def __interface(self):
         window = ctk.CTk()
@@ -33,12 +34,30 @@ class GraphicInterface:
         window.geometry(theme_config.CONFIG_SIZE_CONFIG)
         
         container_coordenates = ctk.CTkFrame(window)
-        container_coordenates.pack(fill="both", expand=True, padx=10, pady=10)
+        container_coordenates.pack(side="left", padx=10, pady=10)
         
-        self.__create_empty_space(window, container_coordenates)
+        container_button = ctk.CTkFrame(window)
+        container_button.pack(padx=10, pady=10)
+        
+        container_map = ctk.CTkFrame(window)
+        container_map.pack(side="right", padx=10, pady=10)
+        
+        container_output = ctk.CTkFrame(window)
+        container_output.pack(side="bottom", padx=10, pady=10)
+        
+        map = self.__generate_map(container_map)
+        out = self.__output(container_output)
+        
+        latitude, longitude = self.__create_empty_space(window, container_coordenates)
+        
+        enter_button = ctk.CTkButton(
+            container_button, text="ENTER", command=lambda: self.__inset_value(map, latitude, longitude, out)
+        )
+        enter_button.pack(padx=10, pady=10)
         
         window.mainloop()
     # END
+    
     
     # This function generate a title for a window
     def __generate_title(self, frame: ctk.CTkFrame):
@@ -46,47 +65,15 @@ class GraphicInterface:
         
         title = ctk.CTkLabel(
             frame,
-            image=None,
+            image=img,
             text="Enter the coordinate value below!",
             pady=10,
-            compound="center",
+            compound="left",
             font=("Arial", 30, "bold"),
             text_color="#FFFFFF"
         )
         title.image = img
         title.pack(padx=10, pady=10)
-    # END
-    
-    
-    # Create a coordinate space
-    def __create_empty_space(self, window: ctk.CTk, container: ctk.CTkFrame):
-        validate = (window.register(self.__validate_number), '%P')
-        
-        self.__generate_title(container)
-        
-        description_latitude = ctk.CTkLabel(container, text="Put here a latitude:")
-        description_latitude.pack(pady=10, padx=30)
-        
-        latitude = ctk.CTkEntry(
-            container, validate="key", validatecommand=validate
-        )
-        latitude.pack(pady=10, padx=30)
-        
-        description_longitude = ctk.CTkLabel(container, text="Put here a longitude:")
-        description_longitude.pack(pady=10, padx=30)
-        
-        longitude = ctk.CTkEntry(
-            container, validate="key", validatecommand=validate
-        )
-        longitude.pack(pady=10, padx=30)
-        
-        map = self.__generate_map(container)
-        out = self.__output(container)
-        
-        enter_button = ctk.CTkButton(
-            container, text="ENTER", command=lambda: self.__inset_value(map, latitude, longitude, out)
-        )
-        enter_button.pack(padx=10, pady=10)
     # END
     
     
@@ -124,9 +111,38 @@ class GraphicInterface:
         local = Local(lat, long)
         local.mapa()
         
-        self.__update_map(map_widget, latitude, longitude)
+        self.__update_map(map_widget, lat, long)
         
         output["text"] = local.pesquisa["Endereço"]
     # END
+    
+    
+    # Create a coordinate space
+    def __create_empty_space(self, window: ctk.CTk, container: ctk.CTkFrame):
+        validate = (window.register(self.__validate_number), '%P')
+        
+        self.__generate_title(container)
+        
+        description_latitude = ctk.CTkLabel(container, text="Put here a latitude:")
+        description_latitude.pack(pady=10, padx=30)
+        
+        latitude = ctk.CTkEntry(
+            container, validate="key", validatecommand=validate
+        )
+        latitude.pack(pady=10, padx=30)
+        
+        description_longitude = ctk.CTkLabel(container, text="Put here a longitude:")
+        description_longitude.pack(pady=10, padx=30)
+        
+        longitude = ctk.CTkEntry(
+            container, validate="key", validatecommand=validate
+        )
+        longitude.pack(pady=10, padx=30)
+        
+        return latitude, longitude
+    # END
+    
+    
+    
     
     
