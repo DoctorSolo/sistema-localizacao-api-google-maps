@@ -2,7 +2,9 @@ import customtkinter as ctk
 import theme_config
 
 from tkintermapview import TkinterMapView
-from src.SerchLocal import SerchLocal
+from src.SearchLocal import SearchLocal
+from src.AIAgent_Gemini import AIAgent_Gemini
+from src.AIAgent_Ollama import AIAgent_Ollama
 from PIL import Image
 
 
@@ -75,7 +77,14 @@ class GraphicInterface:
     # END
     
     
-    def __output(self, frame: ctk.CTkScrollableFrame, text=""):
+    def __output(self, frame: ctk.CTkScrollableFrame, serch: str = ""):
+        if not serch:
+            text = "Description..."
+        else:
+            #ai_agent = AIAgent_Gemini()
+            ai_agent = AIAgent_Ollama()
+            text = ai_agent.generate_response(serch)
+        
         output = ctk.CTkLabel(
             frame, 
             text=text,
@@ -107,18 +116,16 @@ class GraphicInterface:
     
     def __inset_value(self, container: ctk.CTkFrame, map_widget: TkinterMapView, latitude, longitude, output: ctk.CTkLabel):
         if not latitude.get() or not longitude.get():
-            output.destroy()
-            self.__output(container, "Fill both the field!")
             return
         
         lat = float(latitude.get())
         long = float(longitude.get())
-        local = SerchLocal(lat, long)
+        local = SearchLocal(lat, long)
         
         self.__update_map(map_widget, lat, long)
         
         output.destroy()
-        self.__output(container, local.Serch())
+        self.__output(container, local.search_summary())
     # END
     
     
