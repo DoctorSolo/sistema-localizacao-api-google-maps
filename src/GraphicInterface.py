@@ -42,8 +42,8 @@ class GraphicInterface:
         container_coordenates.pack(side="top", fill="both", expand=True, padx=5, pady=5)
         
         # 3. Container de saída (fica embaixo do de coordenadas)
-        container_output = ctk.CTkFrame(left_panel)
-        container_output.pack(side="bottom", fill="both", expand=True, padx=5, pady=5)
+        container_output = ctk.CTkScrollableFrame(left_panel)
+        container_output.pack(side="bottom", fill="both", expand=True, padx=5, pady=(10, 10))
         
         # 4. Container do mapa (painel da direita)
         container_map = ctk.CTkFrame(window)
@@ -60,13 +60,12 @@ class GraphicInterface:
     
     # This function generate a title for a window
     def __generate_title(self, frame: ctk.CTkFrame):
-        img = ctk.CTkImage(Image.open("assets/lupa.png"), size=(100, 100))
+        img = ctk.CTkImage(Image.open("assets/lupa.png"), size=(50, 50))
         
         title = ctk.CTkLabel(
             frame,
             image=img,
             text="Enter the coordinate value below!",
-            pady=10,
             compound="left",
             font=("Arial", 30, "bold"),
             text_color="#FFFFFF"
@@ -76,17 +75,15 @@ class GraphicInterface:
     # END
     
     
-    def __output(self, frame: ctk.CTkFrame, text=""):
+    def __output(self, frame: ctk.CTkScrollableFrame, text=""):
         output = ctk.CTkLabel(
             frame, 
-            text=text, 
+            text=text,
             wraplength=500,
-            pady=10,
-            compound="left",
             font=("Arial", 15, "bold"),
             text_color="#FFFFFF"
             )
-        output.pack(pady=100, padx=10)
+        output.pack(pady=100, padx=10, fill="both", expand=True)
         return output
     # END
     
@@ -131,26 +128,42 @@ class GraphicInterface:
         
         self.__generate_title(container)
         
-        description_latitude = ctk.CTkLabel(container, text="Put here a latitude:")
-        description_latitude.pack(padx=5)
+        lat_and_long_space = ctk.CTkFrame(container, fg_color='transparent')
+        lat_and_long_space.pack(expand=True)
+        
+        lat_space = ctk.CTkFrame(lat_and_long_space, fg_color='transparent')
+        lat_space.pack(expand=True, side='left', padx=5)
+        
+        long_space = ctk.CTkFrame(lat_and_long_space, fg_color='transparent')
+        long_space.pack(expand=True, side='right', padx=5)
+        
+        description_latitude = ctk.CTkLabel(lat_space, text="Put here a latitude:")
+        description_latitude.pack(padx=5, expand=True)
+        
+        description_longitude = ctk.CTkLabel(long_space, text="Put here a longitude:")
+        description_longitude.pack(padx=5, expand=True)
         
         latitude = ctk.CTkEntry(
-            container, validate="key", validatecommand=validate
+            lat_space, validate="key", validatecommand=validate
         )
-        latitude.pack()
-        
-        description_longitude = ctk.CTkLabel(container, text="Put here a longitude:")
-        description_longitude.pack(padx=5)
+        latitude.pack(expand=True)
         
         longitude = ctk.CTkEntry(
-            container, validate="key", validatecommand=validate
+            long_space, validate="key", validatecommand=validate
         )
-        longitude.pack()
+        longitude.pack(expand=True)
         
         enter_button = ctk.CTkButton(
-            container, text="ENTER", command=lambda: self.__inset_value(out_container, map, latitude, longitude, out)
+            container,
+            text="ENTER",
+            compound = "left",                  # Define the position
+            font = ("Arial", 25, "bold"),   # Configure font here
+            text_color = "#000000",             # Text title color
+            width = 150,
+            command=lambda:
+                self.__inset_value(out_container, map, latitude, longitude, out)
         )
-        enter_button.pack(padx=10, pady=30)
+        enter_button.pack(expand=True)
     # END
     
     
