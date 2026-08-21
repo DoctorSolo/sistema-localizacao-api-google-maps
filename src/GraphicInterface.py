@@ -81,9 +81,16 @@ class GraphicInterface:
         if not serch:
             text = "Description..."
         else:
-            #ai_agent = AIAgent_Gemini()
-            ai_agent = AIAgent_Ollama()
-            text = ai_agent.generate_response(serch)
+            try:
+                ai_agent = AIAgent_Gemini()
+                text = ai_agent.generate_response(serch)
+            except Exception:
+                try:
+                    ai_agent = AIAgent_Ollama()
+                    text = ai_agent.generate_response(serch)
+                except Exception:
+                    # If both failed
+                    text = serch
         
         output = ctk.CTkLabel(
             frame, 
