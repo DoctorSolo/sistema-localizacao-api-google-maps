@@ -61,16 +61,14 @@ class SearchLocal:
         """Retorna apenas uma string resumida no formato: 'Rua, Número - Bairro, Cidade - Estado'"""
         details = self.search_details()
         if "error" in details:
-            return "Endereço não encontrado"
-            
-        street = details.get('street', 'Rua desconhecida')
-        number = details.get('number', 'S/N')
+            return "Address not found!"
+        
         neighborhood = details.get('neighborhood', '')
         city = details.get('city', '')
         state = details.get('state', '')
         country = details.get('country', '')
 
-        summary = f"{street}, {number}"
+        summary = ""
         if neighborhood:
             summary += f" - {neighborhood}"
         if city and state:
