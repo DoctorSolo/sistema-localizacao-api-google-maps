@@ -40,7 +40,7 @@ class GraphicInterface:
         top_container.pack(side="top", fill="both", expand=True)
         
         bottom_container = ctk.CTkFrame(window, fg_color='transparent')
-        bottom_container.pack(side="bottom", fill="both", expand=True)
+        bottom_container.pack(side="bottom", fill="x", expand=False)
         
         # 1. Painel principal da esquerda (container pai)
         left_panel = ctk.CTkFrame(top_container, fg_color="transparent")
@@ -52,12 +52,12 @@ class GraphicInterface:
         
         # 2. Container de coordenadas (fica no topo do painel esquerdo)
         container_coordenates = ctk.CTkFrame(left_panel)
-        container_coordenates.pack(side="top", fill="both", expand=True, padx=5, pady=5)
+        container_coordenates.pack(side="top", fill="x", expand=False, padx=5, pady=5)
         
         self.__description_container(description_container)
         
         # 3. Container de saída (fica embaixo do de coordenadas)
-        container_output = ctk.CTkScrollableFrame(description_container, height=400)
+        container_output = ctk.CTkScrollableFrame(description_container)
         container_output.pack(side="bottom", fill="both", expand=True, padx=5, pady=5)
         
         # 4. Container do mapa (painel da direita)
@@ -83,7 +83,7 @@ class GraphicInterface:
             font=('Arial', 30, 'bold'),
             text_color='#FFFFFF'
         )
-        description.pack(side="top", anchor='w', expand=True, padx=(20, 0))
+        description.pack(side="top", anchor='w', expand=False, padx=(20, 0))
     # END
     
     
@@ -170,7 +170,7 @@ class GraphicInterface:
         self.__generate_title(container)
         
         lat_and_long_space = ctk.CTkFrame(container, fg_color='transparent')
-        lat_and_long_space.pack(expand=True)
+        lat_and_long_space.pack(expand=True, pady=10)
         
         lat_space = ctk.CTkFrame(lat_and_long_space, fg_color='transparent')
         lat_space.pack(expand=True, side='left', padx=5)
@@ -200,11 +200,10 @@ class GraphicInterface:
             compound = "left",                  # Define the position
             font = ("Arial", 25, "bold"),   # Configure font here
             text_color = "#000000",             # Text title color
-            width = 150,
             command=lambda:
                 self.__inset_value(out_container, map, latitude, longitude, out)
         )
-        enter_button.pack(expand=True)
+        enter_button.pack(expand=True, pady=(10, 15))
     # END
     
     
@@ -235,7 +234,7 @@ class GraphicInterface:
             cursor='hand2'
         )
         signature.bind("<Button-1>", self.__open_github)
-        signature.pack(side='right', padx=30, pady=5)
+        signature.pack(side='right', padx=30, pady=15)
         
     
     def __exit_button(self, window: ctk.CTk, frame: ctk.CTkFrame) -> None:
@@ -246,4 +245,4 @@ class GraphicInterface:
                                      command=window.destroy,
                                      #fg_color="#431580"
                                      )
-        exit_button.pack(side='left', padx=30, pady=5)
+        exit_button.pack(side='left', padx=30, pady=15)
