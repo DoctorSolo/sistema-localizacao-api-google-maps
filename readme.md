@@ -100,20 +100,22 @@ This project offers two usage options:
 
 <div align="center">
   <h3>🐼 - Follow Me</h3>
+
+  <img height="300" src="https://github.com/DoctorSolo.png"/>
   
   <a href="https://github.com/DoctorSolo">
-    <img height="34" width="120" src="https://img.shields.io/badge/-GitHub-000?style=for-the-badge&logo=GitHub&logoColor=white"/>
+    <img width="120" src="https://img.shields.io/badge/-GitHub-000?style=for-the-badge&logo=GitHub&logoColor=white"/>
   </a>
   <a href="https://bsky.app/profile/doctorsolo.bsky.social">
-    <img height="34" width="120" src="https://img.shields.io/badge/-Bluesky-000?style=for-the-badge&logo=BlueSky&logoColor=blue"/>
+    <img width="130" src="https://img.shields.io/badge/-Bluesky-000?style=for-the-badge&logo=BlueSky&logoColor=blue"/>
   </a>
   <a href="https://www.linkedin.com/in/migueledu303/">
-    <img height="30" width="100" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
+    <img width="110" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
   </a>
   <a href="https://discord.com/users/534808726570270731/">
-    <img height="30" width="100" src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white"/>
+    <img width="130" src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white"/>
   </a>
   <a href="https://dr-solo.itch.io/">
-    <img height="34" width="100" src="https://img.shields.io/badge/-Itch.io-000?style=for-the-badge&logo=itch.io&logoColor=%23E4405F"/>
+    <img width="125" src="https://img.shields.io/badge/-Itch.io-000?style=for-the-badge&logo=itch.io&logoColor=%23E4405F"/>
   </a>
 </div>
