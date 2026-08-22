@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import theme_config
+import webbrowser
 
 from tkintermapview import TkinterMapView
 from src.SearchLocal import SearchLocal
@@ -35,28 +36,54 @@ class GraphicInterface:
         window.title(theme_config.CONFIG_TITLE)
         window.geometry(theme_config.CONFIG_SIZE_CONFIG)
         
+        top_container = ctk.CTkFrame(window, fg_color='transparent')
+        top_container.pack(side="top", fill="both", expand=True)
+        
+        bottom_container = ctk.CTkFrame(window, fg_color='transparent')
+        bottom_container.pack(side="bottom", fill="both", expand=True)
+        
         # 1. Painel principal da esquerda (container pai)
-        left_panel = ctk.CTkFrame(window, fg_color="transparent")
-        left_panel.pack(side="left", fill="both", expand=True, padx=5, pady=10)
+        left_panel = ctk.CTkFrame(top_container, fg_color="transparent")
+        left_panel.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+        
+        # 2. Description Container (Pather)
+        description_container = ctk.CTkFrame(left_panel, fg_color='transparent')
+        description_container.pack(side='bottom', fill='both', expand=True)
         
         # 2. Container de coordenadas (fica no topo do painel esquerdo)
         container_coordenates = ctk.CTkFrame(left_panel)
         container_coordenates.pack(side="top", fill="both", expand=True, padx=5, pady=5)
         
+        self.__description_container(description_container)
+        
         # 3. Container de saída (fica embaixo do de coordenadas)
-        container_output = ctk.CTkScrollableFrame(left_panel)
-        container_output.pack(side="bottom", fill="both", expand=True, padx=5, pady=(10, 10))
+        container_output = ctk.CTkScrollableFrame(description_container, height=400)
+        container_output.pack(side="bottom", fill="both", expand=True, padx=5, pady=5)
         
         # 4. Container do mapa (painel da direita)
-        container_map = ctk.CTkFrame(window)
+        container_map = ctk.CTkFrame(top_container)
         container_map.pack(side="right", fill="both", expand=True, padx=10, pady=10)
         
         map = self.__generate_map(container_map)
         out = self.__output(container_output)
         
-        self.__create_empty_space(window, container_coordenates, map, out, container_output)
+        self.__create_empty_space(container_coordenates, map, out, container_output)
+        
+        self.__footer(window, bottom_container)
         
         window.mainloop()
+    # END
+    
+    
+    def __description_container(self, container: ctk.CTkFrame):
+        description = ctk.CTkLabel(
+            container,
+            text='Description:',
+            anchor='w',
+            font=('Arial', 30, 'bold'),
+            text_color='#FFFFFF'
+        )
+        description.pack(side="top", anchor='w', expand=True, padx=(20, 0))
     # END
     
     
@@ -68,18 +95,18 @@ class GraphicInterface:
             frame,
             image=img,
             text="Enter the coordinate value below!",
-            compound="left",
+            compound='left',
             font=("Arial", 30, "bold"),
             text_color="#FFFFFF"
         )
         title.image = img
-        title.pack(fill="both", expand=True, padx=10)
+        title.pack(fill="both", expand=True, padx=(10, 10))
     # END
     
     
     def __output(self, frame: ctk.CTkScrollableFrame, serch: str = ""):
         if not serch:
-            text = "Description..."
+            text = ""
         else:
             try:
                 ai_agent = AIAgent_Ollama()
@@ -137,8 +164,8 @@ class GraphicInterface:
     
     
     # Create a coordinate space
-    def __create_empty_space(self, window: ctk.CTk, container: ctk.CTkFrame, map: TkinterMapView, out, out_container):
-        validate = (window.register(self.__validate_number), '%P')
+    def __create_empty_space(self, container: ctk.CTkFrame, map: TkinterMapView, out, out_container):
+        validate = (container.register(self.__validate_number), '%P')
         
         self.__generate_title(container)
         
@@ -181,3 +208,42 @@ class GraphicInterface:
     # END
     
     
+    # <--------------->
+    #     FOOTER
+    # <--------------->
+    
+    
+    def __footer(self, window, frame):
+        footer = ctk.CTkFrame(frame)
+        footer.pack(fill='both', expand=True, padx=10, pady=10)
+        
+        self.__signature(footer)
+        self.__exit_button(window, footer)
+    # END
+    
+    
+    def __open_github(self, event) -> None:
+        webbrowser.open('https://github.com/DoctorSolo')
+    
+    
+    def __signature(self, container: ctk.CTkFrame) -> None:
+        signature = ctk.CTkLabel(
+            container,
+            text=f'Autor: @DoctorSolo',
+            font=('Arial',12,'italic','underline'),
+            text_color='#04C4FF',
+            cursor='hand2'
+        )
+        signature.bind("<Button-1>", self.__open_github)
+        signature.pack(side='right', padx=30, pady=5)
+        
+    
+    def __exit_button(self, window: ctk.CTk, frame: ctk.CTkFrame) -> None:
+        exit_button = ctk.CTkButton(frame,
+                                     text="Exit",
+                                     font=("Arial", 25, "bold"),
+                                     text_color="#000000",
+                                     command=window.destroy,
+                                     #fg_color="#431580"
+                                     )
+        exit_button.pack(side='left', padx=30, pady=5)

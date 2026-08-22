@@ -6,14 +6,17 @@ class AIAgent_Ollama:
     def __init__(self):
         self.client = ollama.Client()
 
+
     def generate_response(self, text: str) -> str:
         response = self.client.chat(
             model=OLLAMA_MODEL,
-            # 'messages' PRECISA ser uma lista de dicionários com 'role' e 'content'
             messages=[
                 {
                     'role': 'user',
-                    'content': f'Write a brief, casual, and formatted description of the address: {text}'
+                    'content': f"""
+                    - Write in an organized, clean manner, and skip lines if necessary.
+                    - Describe what you know about this place in a friendly and charismatic way: {text}
+                    """
                 }
             ],
             options={
