@@ -100,11 +100,12 @@ This project offers two usage options:
 
 ##
 
-<div align="center">
-  <h3>🐼 - Follow Me</h3>
-
+<div align=center>
+  <h3 align=center>🐼 - Follow Me</h3>
   <img height="300" src="https://github.com/DoctorSolo.png"/>
-  
+</div>
+
+<div align="center"> 
   <a href="https://github.com/DoctorSolo">
     <img width="120" src="https://img.shields.io/badge/-GitHub-000?style=for-the-badge&logo=GitHub&logoColor=white"/>
   </a>
