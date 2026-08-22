@@ -85,7 +85,9 @@ This project offers two usage options:
 **Input Coordinates:** `48.858844, 2.294351`
 
 **Output:**  
-`Tour Eiffel, 5, Avenue Anatole France, Quartier du Gros-Caillou, Paris 7e Arrondissement, Paris, Île-de-France, France métropolitaine, 75007, France`
+`Paris - IDF, France`
+
+<img src=".github/assets/Screenshot.png"/>
 
 ##
 
