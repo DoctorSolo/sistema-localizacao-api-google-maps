@@ -89,6 +89,15 @@ This project offers two usage options:
 
 ##
 
+<h3 align="center">Credits</h3>
+
+- <img height=30 src="assets/lupa.png"/> Icon created by [Magnific](https://www.flaticon.com/br/autores/magnific) available at [Flaticon](https://www.flaticon.com/br/icone-gratis/lupa_2703438?term=lupa&page=1&position=31&origin=search&related_id=2703438)
+- <img height=30 src="assets/mapa-do-tesouro.png"/> Icon created by [Magnific](https://www.flaticon.com/br/autores/magnific) available at [Flaticon](https://www.flaticon.com/br/icone-gratis/mapa-do-tesouro_475489?term=mapa-do-tesouro&page=1&position=6&origin=search&related_id=475489)
+- <img height=30 src="assets/mapas-e-bandeiras.png"/> Icon created by [Magnific](https://www.flaticon.com/br/autores/magnific) available at [Flaticon](https://www.flaticon.com/br/icone-gratis/mapas-e-bandeiras_447031?term=mapas-e-bandeiras&page=1&position=1&origin=search&related_id=447031)
+- <img height=30 src="assets/seta-esquerda.png"/> Icon created by [Roundicons](https://www.flaticon.com/br/autores/roundicons) available at [Flaticon](https://www.flaticon.com/br/icone-gratis/seta-esquerda_271220?term=seta-esquerda&page=1&position=4&origin=search&related_id=271220)
+
+##
+
 <div align="center">
   <h3>🐼 - Follow Me</h3>
   

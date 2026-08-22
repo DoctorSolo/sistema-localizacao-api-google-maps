@@ -6,7 +6,7 @@ from tkintermapview import TkinterMapView
 from src.SearchLocal import SearchLocal
 from src.AIAgent_Gemini import AIAgent_Gemini
 from src.AIAgent_Ollama import AIAgent_Ollama
-from PIL import Image
+from PIL import Image, ImageTk
 
 
 class GraphicInterface:
@@ -35,6 +35,8 @@ class GraphicInterface:
         window = ctk.CTk()
         window.title(theme_config.CONFIG_TITLE)
         window.geometry(theme_config.CONFIG_SIZE_CONFIG)
+        icon_image = ImageTk.PhotoImage(Image.open(theme_config.CONFIG_ICON))
+        window.wm_iconphoto(True, icon_image)
         
         top_container = ctk.CTkFrame(window, fg_color='transparent')
         top_container.pack(side="top", fill="both", expand=True)
@@ -194,15 +196,18 @@ class GraphicInterface:
         )
         longitude.pack(expand=True)
         
+        img = ctk.CTkImage(Image.open("assets/mapas-e-bandeiras.png"), size=(30, 30))
         enter_button = ctk.CTkButton(
             container,
             text="ENTER",
+            image=img,
             compound = "left",                  # Define the position
             font = ("Arial", 25, "bold"),   # Configure font here
             text_color = "#000000",             # Text title color
             command=lambda:
                 self.__inset_value(out_container, map, latitude, longitude, out)
         )
+        enter_button.image = img
         enter_button.pack(expand=True, pady=(10, 15))
     # END
     
@@ -238,11 +243,15 @@ class GraphicInterface:
         
     
     def __exit_button(self, window: ctk.CTk, frame: ctk.CTkFrame) -> None:
+        img = ctk.CTkImage(Image.open("assets/seta-esquerda.png"), size=(20, 20))
         exit_button = ctk.CTkButton(frame,
-                                     text="Exit",
-                                     font=("Arial", 25, "bold"),
-                                     text_color="#000000",
-                                     command=window.destroy,
-                                     #fg_color="#431580"
-                                     )
+            text="EXIT",
+            image=img,
+            compound="left",
+            font=("Arial", 25, "bold"),
+            text_color="#000000",
+            command=window.destroy,
+            #fg_color="#431580"
+        )
+        exit_button.image = img
         exit_button.pack(side='left', padx=30, pady=15)
