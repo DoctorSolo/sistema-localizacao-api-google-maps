@@ -1,6 +1,6 @@
-<h2 align=center>Sistema simples de localização</h2>
+<h1 align=center>Geocode Aplication</h1>
 
-Este código retorna uma localização geográfica ao usuário apartir de uma cordenada informada. O usuário pode usar para checar os pontos comerciais, turisticos e rotas por perto.
+This code returns a geographic location to the user based on a provided coordinate. Users can utilize it to check nearby commercial locations, tourist attractions, and routes.
 
 ##
 
@@ -50,22 +50,3 @@ Estas duas funções são o esqueleto do projeto, a recomendação é não mudar
 <h3 align=center>Exemplos de Uso</h3>
 
 Supondo que a cordenada escolhida seje `48.858844, 2.294351`, a saída vai ser `Tour Eiffel, 5, Avenue Anatole France, Quartier du Gros-Caillou, Paris 7e Arrondissement, Paris, Île-de-France, France métropolitaine, 75007, France`.
-
-##
-
-<h3 align=center>Contato</h3>
-
-<div align=center>
-	<a href="https://www.instagram.com/doctor_solo_303/">
-		<img align=center src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" height="23"/>
-	</a>
-	<a href="https://www.linkedin.com/in/migueledu303/">
-		<img align=center src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" 	height="23"/>
-	</a>
-	<a href="https://discord.com/users/534808726570270731/">
-		<img align=center src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white"	height="23"/>
-	</a>
-	<a href="https://doctor-solo.itch.io/">
-		<img align=center src="https://img.shields.io/badge/-Itch.io-000?style=for-the-badge&logo=itch.io&logoColor=%23E4405F" 	height="25"/>
-	</a>
-</div>

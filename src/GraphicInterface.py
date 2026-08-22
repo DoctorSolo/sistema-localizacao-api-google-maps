@@ -82,11 +82,11 @@ class GraphicInterface:
             text = "Description..."
         else:
             try:
-                ai_agent = AIAgent_Gemini()
+                ai_agent = AIAgent_Ollama()
                 text = ai_agent.generate_response(serch)
             except Exception:
                 try:
-                    ai_agent = AIAgent_Ollama()
+                    ai_agent = AIAgent_Gemini()
                     text = ai_agent.generate_response(serch)
                 except Exception:
                     # If both failed
