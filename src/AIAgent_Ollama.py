@@ -13,7 +13,7 @@ class AIAgent_Ollama:
             messages=[
                 {
                     'role': 'user',
-                    'content': f'Write a brief, casual description of the address: {text}'
+                    'content': f'Write a brief, casual, and formatted description of the address: {text}'
                 }
             ],
             options={
